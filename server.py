@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request
 from ruamel.yaml import YAML
 from pathlib import Path
-from defusedxml import ElementTree
-from xml.etree.ElementTree import ParseError
+import re
 
 app = Flask(__name__)
 config = YAML(typ='safe').load(Path('config.yml'))
@@ -15,12 +14,9 @@ def thunderbird():
 
 @app.route('/Autodiscover/Autodiscover.xml', methods=['POST'])
 def outlook():
-    try:
-        email = ElementTree.fromstring(request.data).findtext('Request/EMailAddress')
-    except ParseError:
-        email = None
-
+    email = re.search(r'<EMailAddress>(.+)</EMailAddress>', request.data.decode('UTF8'))
     if email is None:
         return 'Invalid autodiscover XML.', 400
+    email = email[1]
 
     return render_template('outlook.xml', email=email, **config)
