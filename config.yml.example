@@ -1,0 +1,10 @@
+domain: example.org
+description: Example Configuration
+imap:
+  domain: example.org
+  port: 993
+  mode: SSL
+smtp:
+  domain: example.org
+  port: 587
+  mode: STARTTLS
