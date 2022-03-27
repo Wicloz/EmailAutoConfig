@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<clientConfig version="1.1">
+  <emailProvider id="{{ domain }}">
+    <domain>{{ domain }}</domain>
+    <displayName>{{ description }}</displayName>
+    <displayShortName>{{ description }}</displayShortName>
+    <incomingServer type="imap">
+      <hostname>{{ imap.domain }}</hostname>
+      <port>{{ imap.port }}</port>
+      <socketType>{{ imap.mode }}</socketType>
+      <authentication>password-cleartext</authentication>
+      <username>%EMAILADDRESS%</username>
+    </incomingServer>
+    <outgoingServer type="smtp">
+      <hostname>{{ smtp.domain }}</hostname>
+      <port>{{ smtp.port }}</port>
+      <socketType>{{ smtp.mode }}</socketType>
+      <authentication>password-cleartext</authentication>
+      <username>%EMAILADDRESS%</username>
+    </outgoingServer>
+  </emailProvider>
+</clientConfig>
