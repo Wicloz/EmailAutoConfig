@@ -2,21 +2,25 @@
 <clientConfig version="1.1">
   <emailProvider id="{{ domain }}">
     <domain>{{ domain }}</domain>
+
     <displayName>{{ description }}</displayName>
     <displayShortName>{{ description }}</displayShortName>
+
     <incomingServer type="imap">
       <hostname>{{ imap.domain }}</hostname>
       <port>{{ imap.port }}</port>
       <socketType>{{ imap.encryption.thunderbird }}</socketType>
       <authentication>password-cleartext</authentication>
-      <username>%EMAILADDRESS%</username>
+      <username>{{ email }}</username>
     </incomingServer>
+
     <outgoingServer type="smtp">
       <hostname>{{ smtp.domain }}</hostname>
       <port>{{ smtp.port }}</port>
       <socketType>{{ smtp.encryption.thunderbird }}</socketType>
       <authentication>password-cleartext</authentication>
-      <username>%EMAILADDRESS%</username>
+      <username>{{ email }}</username>
     </outgoingServer>
+
   </emailProvider>
 </clientConfig>
