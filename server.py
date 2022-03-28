@@ -15,7 +15,8 @@ for protocol in ['imap', 'smtp']:
 
 @app.route('/mail/config-v1.1.xml', methods=['GET'])
 def thunderbird():
-    return render_template('thunderbird.xml', email=None, **config)
+    email = request.args.get('emailaddress')
+    return render_template('thunderbird.xml', email=email, **config)
 
 
 @app.route('/Autodiscover/Autodiscover.xml', methods=['POST'])
