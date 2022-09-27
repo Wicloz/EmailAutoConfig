@@ -1,10 +1,12 @@
 domain: example.org
 description: Example Configuration
+
 imap:
-  domain: example.org
+  domain: mail.example.org
   port: 993
-  mode: SSL
+  encryption: SSL
+
 smtp:
-  domain: example.org
+  domain: mail.example.org
   port: 587
-  mode: STARTTLS
+  encryption: STARTTLS

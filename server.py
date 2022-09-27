@@ -4,13 +4,7 @@ from pathlib import Path
 import re
 
 app = Flask(__name__)
-
 config = YAML(typ='safe').load(Path('config.yml'))
-for protocol in ['imap', 'smtp']:
-    config[protocol]['encryption'] = {
-        'outlook': 'on' if config[protocol]['mode'] in {'SSL', 'STARTTLS'} else 'off',
-        'thunderbird': config[protocol]['mode'],
-    }
 
 
 @app.errorhandler(404)
