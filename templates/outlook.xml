@@ -1,26 +1,39 @@
-<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
+<?xml version="1.0"?>
+<Autodiscover xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
   <Response xmlns="http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a">
     <Account>
+
       <AccountType>email</AccountType>
       <Action>settings</Action>
+
       <Protocol>
         <Type>IMAP</Type>
         <Server>{{ imap.domain }}</Server>
         <Port>{{ imap.port }}</Port>
-        <SSL>{{ imap.encryption.outlook }}</SSL>
+        <SSL>{% if imap.encryption == 'SSL' %}on{% else %}off{% endif %}</SSL>
+        {% if imap.encryption == 'STARTTLS' %}
+          <Encryption>TLS</Encryption>
+        {% endif %}
         <AuthRequired>on</AuthRequired>
         <SPA>off</SPA>
         <LoginName>{{ email }}</LoginName>
       </Protocol>
+
       <Protocol>
         <Type>SMTP</Type>
         <Server>{{ smtp.domain }}</Server>
         <Port>{{ smtp.port }}</Port>
-        <SSL>{{ smtp.encryption.outlook }}</SSL>
+        <SSL>{% if smtp.encryption == 'SSL' %}on{% else %}off{% endif %}</SSL>
+        {% if smtp.encryption == 'STARTTLS' %}
+          <Encryption>TLS</Encryption>
+        {% endif %}
         <AuthRequired>on</AuthRequired>
         <SPA>off</SPA>
         <LoginName>{{ email }}</LoginName>
       </Protocol>
+
     </Account>
   </Response>
 </Autodiscover>
