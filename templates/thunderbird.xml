@@ -9,17 +9,17 @@
     <incomingServer type="imap">
       <hostname>{{ imap.domain }}</hostname>
       <port>{{ imap.port }}</port>
-      <socketType>{{ imap.encryption.thunderbird }}</socketType>
+      <socketType>{% if imap.encryption %}{{ imap.encryption }}{% else %}plain{% endif %}</socketType>
+      <username>%EMAILADDRESS%</username>
       <authentication>password-cleartext</authentication>
-      <username>{{ email }}</username>
     </incomingServer>
 
     <outgoingServer type="smtp">
       <hostname>{{ smtp.domain }}</hostname>
       <port>{{ smtp.port }}</port>
-      <socketType>{{ smtp.encryption.thunderbird }}</socketType>
+      <socketType>{% if smtp.encryption %}{{ smtp.encryption }}{% else %}plain{% endif %}</socketType>
+      <username>%EMAILADDRESS%</username>
       <authentication>password-cleartext</authentication>
-      <username>{{ email }}</username>
     </outgoingServer>
 
   </emailProvider>

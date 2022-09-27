@@ -16,8 +16,7 @@ def redirect_to_lower(error):
 
 @app.route('/mail/config-v1.1.xml', methods=['GET'])
 def thunderbird():
-    email = request.args.get('emailaddress')
-    return render_template('thunderbird.xml', email=email, **config)
+    return render_template('thunderbird.xml', **config)
 
 
 @app.route('/autodiscover/autodiscover.xml', methods=['POST'])
